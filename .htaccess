@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /ShopGundam/
+
+# ✅ Cho phép truy cập trực tiếp các tài nguyên tĩnh (hình ảnh, JS, CSS, FONT)
+RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg|css|js|woff|woff2|ttf|eot|otf)$ [NC]
+RewriteRule ^ - [L]
+
+
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
