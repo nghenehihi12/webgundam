@@ -28,19 +28,27 @@ $assets = $config['assets'];
 
     <!-- Core theme CSS -->
     <link href="<?= $base ?>assets/css/styles.css" rel="stylesheet" />
+
+    <!-- Thêm link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Thêm link Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#">ShopGundam</a>
+            <a class="navbar-brand" href="<?= $baseURL ?>home/index">ShopGundam</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= $baseURL ?>home/index">Home</a></li>
+
+
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
@@ -56,16 +64,29 @@ $assets = $config['assets'];
                     </li>
                 </ul>
 
-                <form method="post" action="<?= $baseURL . 'cart/index' ?>"
-                    class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">
-                            <?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')) ?>
-                        </span>
-                    </button>
-                </form>
+                <div class="d-flex align-items-center">
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                        <a class="btn btn-outline-dark me-2" href="<?= $baseURL ?>user/logout">
+                            <i class="bi-box-arrow-right me-1"></i> Logout
+                        </a>
+                    <?php else: ?>
+                        <a class="btn btn-outline-dark me-2" href="<?= $baseURL ?>user/login">
+                            <i class="bi-person-fill me-1"></i> Login
+                        </a>
+                    <?php endif; ?>
+
+
+                    <form method="post" action="<?= $baseURL . 'cart/index' ?>"
+                        class="d-flex">
+                        <button class="btn btn-outline-dark" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                <?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')) ?>
+                            </span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>

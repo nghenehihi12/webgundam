@@ -7,6 +7,44 @@ $assets = $config['assets'];
 include './App/Views/Layout/homeHeader.php';
 ?>
 
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Hiển thị modal nếu có lỗi
+if (isset($_SESSION['error'])): ?>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?= $_SESSION['error'] ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <a href="<?= $baseURL ?>user/login" class="btn btn-primary">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mở Modal khi có thông báo lỗi
+        var myModal = new bootstrap.Modal(document.getElementById('loginModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    </script>
+
+    <?php unset($_SESSION['error']); // Xoá thông báo sau khi hiển thị 
+    ?>
+<?php endif; ?>
+
+
 <!-- Section: Cart -->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -29,7 +67,7 @@ include './App/Views/Layout/homeHeader.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($cartItems as $item): 
+                    <?php foreach ($cartItems as $item):
                         $total = $item['Price'] * $item['quantity'];
                         $grandTotal += $total;
                     ?>

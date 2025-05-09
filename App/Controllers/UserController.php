@@ -10,8 +10,7 @@ class UserController
     }
     public function register()
     {
-        if (session_status() === PHP_SESSION_NONE)
-        {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
@@ -31,8 +30,8 @@ class UserController
             $_SESSION['user_id'] = $userId;
             $_SESSION['username'] = $username;
 
-            header("Location: " . $baseURL. 'home/index');
-            exit;    
+            header("Location: " . $baseURL . 'home/index');
+            exit;
         }
 
 
@@ -60,7 +59,7 @@ class UserController
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
-                header("Location: " . $GLOBALS['config']['baseURL']); // về trang chủ
+                header("Location: " . $GLOBALS['config']['baseURL'] . "home/index");
                 exit;
             } else {
                 $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
@@ -68,5 +67,22 @@ class UserController
         }
 
         include './App/Views/User/login.php';
+    }
+    public function logout()
+    {
+        // Bắt đầu phiên làm việc nếu chưa có
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Xoá tất cả biến session
+        session_unset();
+
+        // Hủy toàn bộ session
+        session_destroy();
+
+        // Chuyển hướng về trang chủ hoặc trang đăng nhập
+        header("Location: " . $GLOBALS['config']['baseURL'] . "home/index");
+        exit;
     }
 }

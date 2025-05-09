@@ -5,6 +5,7 @@ $baseURL = $config['baseURL'];
 
 <?php include './App/Views/Layout/homeHeader.php'; ?>
 
+
 <div class="container mt-5 mb-5" style="max-width: 500px;">
     <h2 class="text-center mb-4">🔐 Đăng nhập</h2>
 
@@ -28,5 +29,8 @@ $baseURL = $config['baseURL'];
         Chưa có tài khoản? <a href="<?= $baseURL ?>user/register">Đăng ký</a>
     </div>
 </div>
+
+
+
 
 <?php include './App/Views/Layout/homeFooter.php'; ?>
