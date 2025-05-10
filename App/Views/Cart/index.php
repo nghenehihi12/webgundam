@@ -91,6 +91,11 @@ if (isset($_SESSION['error'])): ?>
             <div class="text-end">
                 <a href="<?= $baseURL ?>order/checkout" class="btn btn-success">🛍️ Tiến hành thanh toán</a>
             </div>
+            <!-- Nút xóa giỏ hàng -->
+            <form method="post" class=" mt-2 text-end">
+                <button type="submit" name="clear_cart" class="btn btn-danger">🗑️ Xóa toàn bộ giỏ hàng</button>
+            </form>
+
         <?php endif; ?>
     </div>
 </section>

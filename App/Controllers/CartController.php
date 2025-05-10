@@ -8,6 +8,16 @@ class CartController
 {
     public function index()
     {
+        // Xử lý xóa giỏ hàng nếu có yêu cầu POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_cart'])) {
+            unset($_SESSION['cart']);
+            $config = require 'config.php';
+
+            $baseURL = $config['baseURL'];
+            header('Location:' . $baseURL . '/cart/index'); // hoặc $baseURL . "cart" nếu cần redirect đầy đủ
+            exit;
+        }
+
         require_once './App/Model/ProductModel.php';
         $productModel = new ProductModel();
 
@@ -20,17 +30,17 @@ class CartController
                 $cartItems[] = $product;
             }
         }
-        // var_dump($cartItems);
-        // die;
 
-        include './App/Views/cart/index.php';    
-
+        include './App/Views/cart/index.php';
     }
+
 
     public function add()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' 
-            && isset($_POST['product_id'])) {
+        if (
+            $_SERVER['REQUEST_METHOD'] === 'POST'
+            && isset($_POST['product_id'])
+        ) {
             $productId = $_POST['product_id'];
 
             if (!isset($_SESSION['cart'])) {
@@ -46,11 +56,11 @@ class CartController
                 ];
             }
             $config = require 'config.php';
-            
-            $baseURL = $config['baseURL'];
-           
 
-            header('Location:'. $baseURL.'/home/index');
+            $baseURL = $config['baseURL'];
+
+
+            header('Location:' . $baseURL . '/home/index');
             exit;
         }
     }
