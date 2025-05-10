@@ -1,53 +1,47 @@
-<?php
-include_once __DIR__ . "/../Layout/header.php";
-include_once __DIR__ . "/../Layout/header.php";
+<?php include_once __DIR__ . '/../Layout/adminHeader.php'; ?>
 
-// var_dump($productList);
 
-?>
-
-<div class="panel panel-default">
-    <div class="panel-heading">Danh sách sản phẩm</div>
-    <div class="panel-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($productList as $item) {
-                ?>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-center">
+                <thead class="thead-dark">
                     <tr>
-                        <td><?= $item['Id'] ?></td>
-                        <td><?= $item['Name'] ?></td>
-                        <td><?= $item['Price'] ?></td>
-                        <td><?= $item['Image'] ?></td>
-                        <td>
-                        <form action="delete" method="POST">
-                            <input type="hidden" 
-                            name="ProductID" 
-                            value="<?= $item['Id'] ?>" />
-                            <button type="submit"                                 
-                                style="border: none; background: none; cursor: pointer;">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
-                        </td>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Price (VND)</th>
+                        <th>Image</th>
+                        <th>Action</th>
                     </tr>
-                <?php
-                }
-                ?>
-
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($productList as $item): ?>
+                        <tr>
+                            <td><?= $item['Id'] ?></td>
+                            <td><?= $item['Name'] ?></td>
+                            <td><?= number_format($item['Price'], 0, ',', '.') ?></td>
+                            <td><?= $item['image'] ?></td>
+                            <td>
+                                <form action="delete" method="POST">
+                                    <input type="hidden"
+                                        name="ProductID"
+                                        value="<?= $item['Id'] ?>" />
+                                    <button type="submit"
+                                        style="border: none; background: none; cursor: pointer;">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<?php
-include_once __DIR__ . "/../Layout/footer.php";
+
+<?php include_once __DIR__ . '/../Layout/adminFooter.php'; ?>
