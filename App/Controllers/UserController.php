@@ -100,4 +100,41 @@ class UserController
     {
         include './App/Views/User/profile.php';
     }
+
+    public function changePassword()
+    {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: " . $GLOBALS['config']['baseURL'] . "user/login");
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_SESSION['user_id'];
+            $currentPassword = $_POST['current_password'];
+            $newPassword = $_POST['new_password'];
+            $confirmPassword = $_POST['confirm_password'];
+
+            $pdo = new PDO("mysql:host=localhost;dbname=productdb", "root", "");
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
+            $stmt->execute([$userId]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user || !password_verify($currentPassword, $user['password'])) {
+                $message = "Mật khẩu hiện tại không đúng.";
+            } elseif ($newPassword !== $confirmPassword) {
+                $message = "Mật khẩu mới không khớp.";
+            } else {
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                $updateStmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+                $updateStmt->execute([$hashedPassword, $userId]);
+                $message = "Cập nhật mật khẩu thành công.";
+            }
+
+            // Load lại trang profile và truyền message
+            include './App/Views/User/profile.php';
+        }
+    }
 }
