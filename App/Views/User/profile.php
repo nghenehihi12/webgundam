@@ -29,26 +29,30 @@ $email    = $_SESSION['email'] ?? '';
         </div>
     </div>
 
-    <h4 class="mb-3">Đổi mật khẩu</h4>
-    <?php if (!empty($message)): ?>
-        <div class="alert alert-info"><?= $message ?></div>
-    <?php endif; ?>
+    <!-- Bọc toàn bộ phần đổi mật khẩu trong thẻ card -->
+    <div class="card p-4 shadow-sm mt-4">
+        <h4 class="mb-3">Đổi mật khẩu</h4>
 
-    <form method="POST" action="<?= $baseURL ?>user/changePassword">
-        <div class="mb-3">
-            <label class="form-label">Mật khẩu hiện tại</label>
-            <input type="password" name="current_password" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Mật khẩu mới</label>
-            <input type="password" name="new_password" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Xác nhận mật khẩu mới</label>
-            <input type="password" name="confirm_password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Cập nhật mật khẩu</button>
-    </form>
-</div>
+        <?php if (!empty($message)): ?>
+            <div class="alert alert-info"><?= $message ?></div>
+        <?php endif; ?>
 
-<?php include './App/Views/Layout/homeFooter.php'; ?>
+        <form method="POST" action="<?= $baseURL ?>user/changePassword">
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu hiện tại</label>
+                <input type="password" name="current_password" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu mới</label>
+                <input type="password" name="new_password" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Xác nhận mật khẩu mới</label>
+                <input type="password" name="confirm_password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">✔ Cập nhật mật khẩu</button>
+        </form>
+    </div>
+
+
+    <?php include './App/Views/Layout/homeFooter.php'; ?>

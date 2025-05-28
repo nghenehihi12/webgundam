@@ -63,6 +63,8 @@ class UserController
                 $_SESSION['role'] = $user['role']; // <- Thêm dòng này để lưu vai trò
                 $_SESSION['password'] = $user['password'];
                 $_SESSION['fullname'] = $user['fullname'];
+                $_SESSION['email'] = $user['email'];
+
                 // ✅ Chuyển hướng dựa trên vai trò
                 if ($user['role'] === 'admin') {
                     header("Location: " . $GLOBALS['config']['baseURL'] . "admin/dashboard");
