@@ -1,8 +1,8 @@
 <?php
 return array(
-    'base' => '/ShopGundam/',
-    'assets' => '/ShopGundam/assets/',
-    'baseURL' => 'http://localhost/ShopGundam/',
+    'base' => '/webgundam/',
+    'assets' => '/webgundam/assets/',
+    'baseURL' => 'http://localhost/webgundam/',
     'db' => array(
         'host'     => 'localhost',
         'name'     => 'ProductDB',

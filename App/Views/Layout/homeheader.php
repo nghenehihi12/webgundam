@@ -41,7 +41,7 @@ $assets = $config['assets'];
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="<?= $baseURL ?>home/index">ShopGundam</a>
+            <a class="navbar-brand" href="<?= $baseURL ?>home/index">ShopLacLoi</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -66,28 +66,31 @@ $assets = $config['assets'];
 
                 <div class="d-flex align-items-center">
                     <?php if (isset($_SESSION['user_id'])): ?>
-                        <a class="btn btn-outline-dark me-2" href="<?= $baseURL ?>user/logout">
-                            <i class="bi-box-arrow-right me-1"></i> Logout
+                        <a class="btn btn-outline-dark me-2" href="<?= $baseURL ?>user/profile">
+                            <i class="bi-person-circle me-1"></i>
+                            <?= htmlspecialchars($_SESSION['username']) ?>
                         </a>
                     <?php else: ?>
                         <a class="btn btn-outline-dark me-2" href="<?= $baseURL ?>user/login">
                             <i class="bi-person-fill me-1"></i> Login
                         </a>
                     <?php endif; ?>
-
-
-                    <form method="post" action="<?= $baseURL . 'cart/index' ?>"
-                        class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">
-                                <?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')) ?>
-                            </span>
-                        </button>
-                    </form>
                 </div>
+
+
+
+                <form method="post" action="<?= $baseURL . 'cart/index' ?>"
+                    class="d-flex">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">
+                            <?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')) ?>
+                        </span>
+                    </button>
+                </form>
             </div>
+        </div>
         </div>
     </nav>
 

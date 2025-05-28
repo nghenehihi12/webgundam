@@ -57,9 +57,18 @@ class UserController
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
+                // ✅ Lưu thông tin vào session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
-                header("Location: " . $GLOBALS['config']['baseURL'] . "home/index");
+                $_SESSION['role'] = $user['role']; // <- Thêm dòng này để lưu vai trò
+                $_SESSION['password'] = $user['password'];
+                $_SESSION['fullname'] = $user['fullname'];
+                // ✅ Chuyển hướng dựa trên vai trò
+                if ($user['role'] === 'admin') {
+                    header("Location: " . $GLOBALS['config']['baseURL'] . "admin/dashboard");
+                } else {
+                    header("Location: " . $GLOBALS['config']['baseURL'] . "home/index");
+                }
                 exit;
             } else {
                 $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
@@ -68,6 +77,7 @@ class UserController
 
         include './App/Views/User/login.php';
     }
+
     public function logout()
     {
         // Bắt đầu phiên làm việc nếu chưa có
@@ -84,5 +94,10 @@ class UserController
         // Chuyển hướng về trang chủ hoặc trang đăng nhập
         header("Location: " . $GLOBALS['config']['baseURL'] . "home/index");
         exit;
+    }
+
+    public function profile()
+    {
+        include './App/Views/User/profile.php';
     }
 }
