@@ -54,5 +54,11 @@ $email    = $_SESSION['email'] ?? '';
         </form>
     </div>
 
+    <div class="mt-4 text-end">
+        <a href="<?= $baseURL ?>user/logout" class="btn btn-danger">
+            <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+        </a>
+    </div>
+
 
     <?php include './App/Views/Layout/homeFooter.php'; ?>
