@@ -397,6 +397,15 @@ button:not(:disabled),
   border-style: none;
 }
 
+
+.nav-link.active {
+    color: #fff !important;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+
+
 textarea {
   resize: vertical;
 }
