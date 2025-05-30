@@ -25,6 +25,13 @@ class OrderController
         $productModel = new ProductModel();
         $total = 0;
 
+        if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart']) || empty($_SESSION['cart'])) {
+            // Nếu giỏ hàng trống hoặc không tồn tại, chuyển hướng về trang giỏ hàng với thông báo lỗi
+            $_SESSION['error'] = 'Giỏ hàng của bạn đang trống.';
+            header('Location: ' . $GLOBALS['config']['baseURL'] . 'cart/index');
+            exit;
+        }
+
         foreach ($_SESSION['cart'] as $item) {
             $product = $productModel->getProductById($item['product_id']);
             $total += $product['Price'] * $item['quantity'];

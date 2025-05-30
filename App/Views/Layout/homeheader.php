@@ -112,3 +112,5 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
         </div>
     </header> -->
     <div class="wrapper">
+        <!-- Bootstrap JS Bundle (phải có để modal hoạt động) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

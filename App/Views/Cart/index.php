@@ -2,7 +2,7 @@
 $config = require 'config.php';
 $base = $config['base'];
 $baseURL = $config['baseURL'];
-$assets = $config['assets'];
+$assets = isset($config['assets']) ? $config['assets'] : '';
 
 include './App/Views/Layout/homeHeader.php';
 ?>
