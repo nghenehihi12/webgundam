@@ -1,5 +1,6 @@
 <?php
-include_once 'Layout/homeHeader.php';
+$currentPage = 'home';
+include_once 'Layout/homeheader.php';
 ?>
 
 <!-- Section: Products -->
