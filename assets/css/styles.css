@@ -11191,3 +11191,17 @@ html, body {
 .content {
   flex: 1; /* chiếm hết chiều cao còn lại */
 }
+
+
+.card-header.bg-primary {
+    background-color: #343a40 !important; /* xám đậm */
+    color: #fff !important;
+}
+
+.card .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+}
+.card .btn-primary:hover {
+    background-color: #0b5ed7;
+}

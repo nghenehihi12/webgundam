@@ -74,6 +74,17 @@ class ProductController
 
     public function detail($id)
     {
-        echo $id;
+        $pdo = new PDO("mysql:host=localhost;dbname=productdb", "root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE Id = ?");
+        $stmt->execute([$id]);
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$product) {
+            die('Sản phẩm không tồn tại');
+        }
+
+        include './App/Views/Product/detail.php';
     }
 }
