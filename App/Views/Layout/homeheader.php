@@ -47,8 +47,8 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= $baseURL . 'home/index' ?>">Shop it</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?= $baseURL . 'user/contact' ?>">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link " aria-current="page" href="<?= $baseURL . 'home/index' ?>">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= $baseURL . 'user/contact' ?>">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Grade Gundam</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -112,5 +112,3 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
         </div>
     </header> -->
     <div class="wrapper">
-        <!-- Bootstrap JS Bundle (phải có để modal hoạt động) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
