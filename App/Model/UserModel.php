@@ -8,7 +8,12 @@ class UserModel
     {
         $this->db = Database::connect();
     }
-    public function getAllUsers() {}
+    public function getAllUsers()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users ORDER BY id ASC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function createUser($fullname, $username, $password)
     {

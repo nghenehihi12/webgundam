@@ -10,13 +10,12 @@ class OrderController
             session_start();
         }
 
+        $config = require __DIR__ . '/../../config.php';
+
         // Kiểm tra nếu người dùng chưa đăng nhập (chưa có user_id trong session)
         if (!isset($_SESSION['user_id'])) {
-            // Lưu thông báo lỗi vào session để hiển thị trên trang đăng nhập
             $_SESSION['error'] = 'Bạn cần đăng nhập trước khi thanh toán.';
-
-            // Chuyển hướng về trang đăng nhập
-            header('Location: ' . $GLOBALS['config']['baseURL'] . 'cart/index');
+            header('Location: ' . $config['baseURL'] . 'cart/index');
             exit;
         }
 
@@ -26,9 +25,8 @@ class OrderController
         $total = 0;
 
         if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart']) || empty($_SESSION['cart'])) {
-            // Nếu giỏ hàng trống hoặc không tồn tại, chuyển hướng về trang giỏ hàng với thông báo lỗi
             $_SESSION['error'] = 'Giỏ hàng của bạn đang trống.';
-            header('Location: ' . $GLOBALS['config']['baseURL'] . 'cart/index');
+            header('Location: ' . $config['baseURL'] . 'cart/index');
             exit;
         }
 
@@ -48,15 +46,15 @@ class OrderController
         include './App/Views/Order/checkout_success.php';
     }
 
-
     public function history()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
+        $config = require __DIR__ . '/../../config.php';
+
         if (!isset($_SESSION['user_id'])) {
-            $config = require './config.php';
             header("Location: " . $config['baseURL'] . "user/login");
             exit;
         }
@@ -65,9 +63,22 @@ class OrderController
         $orderModel = new OrderModel();
         $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
 
-        $config = require './config.php';
         $baseURL = $config['baseURL'];
-
         include './App/Views/Order/history.php';
+    }
+
+    public function updateOrderStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $orderId = $_POST['order_id'];
+            $status = $_POST['status'];
+            if (isset($status) && !empty($status)) {
+                $orderModel = new OrderModel();
+                $orderModel->updateStatus($orderId, $status);
+            }
+            $config = require __DIR__ . '/../../config.php';
+            header('Location: ' . $config['baseURL'] . 'admin/orderList');
+            exit();
+        }
     }
 }

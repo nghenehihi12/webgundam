@@ -15,11 +15,11 @@ class ProductModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insertProduct($name, $price, $image)
+    public function insertProduct($name, $category, $price, $image, $description)
     {
-        $sql = "INSERT INTO products (Name, Price, Image) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO products (Name, category, Price, Image, description) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$name, $price, $image]);
+        $stmt->execute([$name, $category, $price, $image, $description]);
     }
 
     public function deleteProduct($productId)
@@ -28,7 +28,6 @@ class ProductModel
                 WHERE Id = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$productId]);
-
     }
     public function getProductById($id)
     {

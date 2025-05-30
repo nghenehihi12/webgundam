@@ -1,6 +1,7 @@
 <?php
 $config = require_once './config.php';
 require_once './App/Model/UserModel.php';
+require_once __DIR__ . '/../../Core/PHPMailer/Mailer.php';
 
 class UserController
 {
@@ -105,7 +106,6 @@ class UserController
 
     public function changePassword()
     {
-        if (session_status() === PHP_SESSION_NONE) session_start();
         if (!isset($_SESSION['user_id'])) {
             header("Location: " . $GLOBALS['config']['baseURL'] . "user/login");
             exit;
@@ -141,6 +141,8 @@ class UserController
     }
     public function contact()
     {
+
+        if (session_status() === PHP_SESSION_NONE) session_start();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $userName = htmlspecialchars($_POST['name']);
             $userEmail = htmlspecialchars($_POST['email']);

@@ -31,28 +31,23 @@ class ProductController
     public function store()
     {
         $name = $_POST['name'] ?? '';
+        $category = $_POST['category'] ?? ''; // Lấy grade
         $price = $_POST['price'] ?? 0;
+        $description = $_POST['description'] ?? '';
         $image = '';
 
         // Kiểm tra và xử lý upload ảnh
         if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-            // Kiểm tra định dạng ảnh
             $imageExt = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $allowedExts = ['jpg', 'jpeg', 'png', 'gif'];
             $imageSize = $_FILES['image']['size'];
 
-            // Kiểm tra định dạng và kích thước ảnh (giới hạn 5MB)
             if (in_array(strtolower($imageExt), $allowedExts) && $imageSize <= 5 * 1024 * 1024) {
-                // Tạo tên tệp duy nhất để tránh trùng
                 $image = basename($_FILES['image']['name']);
-                $uploadDir = __DIR__ . '/../../assets/images/'; // Lưu ảnh vào thư mục images/
-
-                // Kiểm tra nếu thư mục images không tồn tại, tạo thư mục
+                $uploadDir = __DIR__ . '/../../assets/images/';
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
-
-                // Di chuyển ảnh vào thư mục images
                 if (!move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $image)) {
                     echo "Lỗi khi tải ảnh lên.";
                     exit;
@@ -65,7 +60,7 @@ class ProductController
 
         // Gọi Model để lưu thông tin sản phẩm vào DB
         $product = new ProductModel();
-        $product->insertProduct($name, $price, 'images/' . $image); // Lưu đường dẫn ảnh vào DB
+        $product->insertProduct($name, $category, $price, 'images/' . $image, $description);
 
         // Chuyển hướng về trang danh sách sau khi thêm thành công
         header("Location:index");

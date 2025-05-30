@@ -74,6 +74,9 @@ $currentPage = basename($_SERVER['REQUEST_URI']);
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
                                 <li><a class="dropdown-item" href="<?= $baseURL ?>user/profile"><?= $_SESSION['username'] ?></a></li>
+                                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                    <li><a class="dropdown-item" style="font-weight: 500;" href="<?= $baseURL ?>admin/dashboard">Quản lý</a></li>
+                                <?php endif; ?>
                                 <li><a class="dropdown-item" href="<?= $baseURL ?>order/history">Lịch sử đơn hàng</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />

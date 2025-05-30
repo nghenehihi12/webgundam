@@ -28,7 +28,7 @@ class Mailer
             $mail->Port       = 465;
 
             // Recipients
-            $mail->setFrom('no-reply@shopdientutop1.com', 'Dien Tu Top 1');
+            $mail->setFrom('no-reply@shoplacloi.com', 'ShopLacLoi');
             $mail->addAddress($to);     // Người nhận
 
             // Content

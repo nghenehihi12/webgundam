@@ -43,14 +43,14 @@ $assets = $config['assets'];
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #23272b;">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $baseURL ?>admin/dashboard">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">ShopLacLoi</sup></div>
             </a>
 
             <!-- Divider -->
@@ -98,10 +98,9 @@ $assets = $config['assets'];
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <a class="collapse-item" href="<?= $baseURL ?>admin/userList">Userlist</a>
+                        <a class="collapse-item" href="<?= $baseURL ?>admin/orderList">Orderlist</a>
+                        <a class="collapse-item" href="<?= $baseURL ?>admin/report">Report</a>
                     </div>
                 </div>
             </li>
@@ -129,25 +128,25 @@ $assets = $config['assets'];
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="<?= $baseURL ?>home/index">Home</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

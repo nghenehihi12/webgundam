@@ -11,9 +11,10 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>#</th>
+                        <th>Image</th>
+                        <th>Grade</th>
                         <th>Product Name</th>
                         <th>Price (VND)</th>
-                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -21,9 +22,12 @@
                     <?php foreach ($productList as $item): ?>
                         <tr>
                             <td><?= $item['Id'] ?></td>
+                            <td>
+                                <img src="<?= $assets . $item['image'] ?>" alt="<?= $item['Name'] ?>" style="width:48px; height:48px; object-fit:contain;">
+                            </td>
+                            <td><?= $item['category'] ?></td>
                             <td><?= $item['Name'] ?></td>
                             <td><?= number_format($item['Price'], 0, ',', '.') ?></td>
-                            <td><?= $item['image'] ?></td>
                             <td>
                                 <form action="delete" method="POST">
                                     <input type="hidden"
